@@ -19,16 +19,16 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
     >
       <span
         style={{ background: dotColor }}
-        clasName="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
+        className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
       >
         {icon}
       </span>
     </button>
   </TooltipComponent>
-);
+)
 
 const Navbar = () => {
-  const { activeMenu, setActiveMenu } = useStateContext();
+  const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick } = useStateContext();
   return (
     <div className="flex justify-between p-2 md:mx-6 relative">
       <NavButton
@@ -37,7 +37,7 @@ const Navbar = () => {
         color="blue"
         icon={<AiOutlineMenu />}
       />
-      <div className="felx">
+      <div className="flex">
         <NavButton
           title="Cart"
           customFunc={() => handleClick("cart")}
@@ -53,6 +53,7 @@ const Navbar = () => {
         />
         <NavButton
           title="Notifications"
+          dotColor="orange"
           customFunc={() => handleClick("notification")}
           color="blue"
           icon={<RiNotification3Line />}
@@ -71,8 +72,13 @@ const Navbar = () => {
                <span className="text-gray-400 text-14">Hi,</span> {' '}
                <span classNmae="text-gray-400 font-bold ml-1 text-14">Ervin</span>
              </p>
+             <MdKeyboardArrowDown clasName="text-gray-400 text-14"/>
              </div>
         </TooltipComponent>
+        {isClicked.cart && <Cart/>}
+        {isClicked.chat && <Chat/>}
+        {isClicked.notification && <Notification/>}
+        {isClicked.userProfile && <UserProfile/>}
       </div>
     </div>
   );
